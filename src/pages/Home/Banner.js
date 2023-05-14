@@ -23,6 +23,7 @@ const Banner = () => {
                     setSearchData(data.data);
                 }
                 else {
+                    setSearchData();
                     toast.error('Have no flight on this date!!')
                 }
             })
@@ -66,7 +67,7 @@ const Banner = () => {
 
                 </form>
                 {
-                    user ?
+                    user && searchData ?
                         <SearchItems searchData={searchData}></SearchItems>
                         :
                         ''

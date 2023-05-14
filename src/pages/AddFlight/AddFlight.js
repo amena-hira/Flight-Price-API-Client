@@ -9,7 +9,6 @@ const AddFlight = () => {
     const [destination, setDestination] = useState();
 
     const handleFlightNames = (value) => {
-        console.log("length", flightName.length);
         if (flightName.length >= 0 && flightName.length < 3) {
             if (!flightName.includes(value)) {
                 setFlightName(flightName => [...flightName, value])
@@ -43,9 +42,10 @@ const AddFlight = () => {
             flightName,
             flightPrice
         }
-        if (source !== undefined) {
+        if (source !== undefined && destination !== 'Select Destination') {
             console.log(flight);
             if (flightName.length === flightPrice.length) {
+                console.log(true);
                 fetch('http://localhost:5000/flights', {
                     method: 'POST',
                     headers: {
@@ -61,12 +61,22 @@ const AddFlight = () => {
                             setFlightPrice([]);
                             toast.success("Flight Added Successfully!")
                         }
+                        else {
+                            toast("Already added flight on this date. Thank You!!", {
+                                icon: '👏',
+                            })
+                        }
 
                     })
             }
             else {
                 toast.error('Please Add Price For All Selected Airlines')
             }
+        }
+        else {
+            toast('Select all information. Thank you!!', {
+                icon: '👏',
+            });
         }
 
 
