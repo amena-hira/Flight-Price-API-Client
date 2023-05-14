@@ -2,20 +2,30 @@ import React, { useContext, useState } from 'react';
 import background from '../../images/background.webp';
 import SearchItems from './SearchItems';
 import { AuthContext } from '../../context/AuthProvider';
+import { toast } from 'react-hot-toast';
+
 
 const Banner = () => {
     const [source, setSource] = useState();
     const [destination, setDestination] = useState();
+    const [searchData, setSearchData] = useState();
     const { user } = useContext(AuthContext);
     const handleSearchSubmit = (event) => {
         event.preventDefault();
         const from = event.target;
         const date = from.date.value;
         fetch(`http://localhost:5000/flights?source=${source}&destination=${destination}&date=${date}`)
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.status) {
+                    console.log(data.status);
+                    setSearchData(data.data);
+                }
+                else {
+                    toast.error('Have no flight on this date!!')
+                }
+            })
     }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: `url(${background})` }}>
@@ -43,15 +53,21 @@ const Banner = () => {
                         </select>
                     </div>
                     <div className="form-control">
-                        <input name='date' type="text" placeholder='Date' onFocus={(e) => (e.target.type = "date")} className="input input-bordered text-zinc-800" />
+                        <input name='date' type="text" placeholder='Date' onFocus={(e) => (e.target.type = "date")} className="input input-bordered text-zinc-800" required />
                     </div>
                     <div className="form-control w-32">
-                        <button className="btn bg-cyan-800 border-none">Search Now</button>
+                        {
+                            user ?
+                                <button className="btn bg-cyan-800 border-none hover:bg-sky-900">Search Now</button>
+                                :
+                                <button className="px-3 py-3 text-white bg-sky-300 rounded focus:outline-none" disabled>Search Now</button>
+                        }
                     </div>
+
                 </form>
                 {
                     user ?
-                        <SearchItems></SearchItems>
+                        <SearchItems searchData={searchData}></SearchItems>
                         :
                         ''
                 }
