@@ -1,9 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import background from '../../images/background.webp';
 import { FcHome } from "react-icons/fc";
+import { AuthContext } from '../../context/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Signup = () => {
+    const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleSignUp = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        createUser(email, password)
+            .then(result => {
+                console.log(result);
+                navigate('/');
+                toast.success('Sign up successfully!!!')
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: `url(${background})` }}>
             <div className="hero-overlay bg-opacity-60"></div>
@@ -18,7 +40,7 @@ const Signup = () => {
                         Sign Up
                     </h1>
 
-                    <form >
+                    <form onSubmit={handleSignUp}>
                         <div className="form-control md:w-96">
                             <label className="label">
                                 <span className="label-text text-white">Email</span>

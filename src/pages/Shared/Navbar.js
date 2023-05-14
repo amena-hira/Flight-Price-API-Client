@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import profile from '../../images/profile.jpg';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Navbar = () => {
+    const {user, logout} = useContext(AuthContext);
     const menu = <>
         <li><Link to='/'>Home</Link></li>
     </>
@@ -26,19 +28,24 @@ const Navbar = () => {
                             <ul className="menu menu-horizontal px-1 hidden md:flex">
                                 {menu}
                             </ul>
-                            <div className="dropdown dropdown-end">
+                            {
+                                user?
+                                <div className="dropdown dropdown-end">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
                                         <img src={profile} alt='Profile' />
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li><Link>Logout</Link></li>
+                                    <li><Link onClick={logout}>Logout</Link></li>
                                 </ul>
                             </div>
+                            :
                             <ul className="menu menu-horizontal px-1 hidden md:flex">
                                 <li><Link to='/login'>Login</Link></li>
                             </ul>
+                            }
+                            
                         </div>
                     </div>
                 </div>
