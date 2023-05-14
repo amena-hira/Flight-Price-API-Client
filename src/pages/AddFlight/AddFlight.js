@@ -46,7 +46,7 @@ const AddFlight = () => {
             console.log(flight);
             if (flightName.length === flightPrice.length) {
                 console.log(true);
-                fetch('http://localhost:5000/flights', {
+                fetch('https://flight-price-api-server.vercel.app/flights', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

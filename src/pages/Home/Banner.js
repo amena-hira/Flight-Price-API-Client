@@ -14,7 +14,7 @@ const Banner = () => {
         event.preventDefault();
         const from = event.target;
         const date = from.date.value;
-        fetch(`http://localhost:5000/flights?source=${source}&destination=${destination}&date=${date}`)
+        fetch(`https://flight-price-api-server.vercel.app/flights?source=${source}&destination=${destination}&date=${date}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
