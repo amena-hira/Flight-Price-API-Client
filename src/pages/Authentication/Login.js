@@ -60,7 +60,7 @@ const Login = () => {
                             <span className="text-4xl"><FcGoogle></FcGoogle></span>
                         </div>
                     </div>
-                    <form >
+                    <form onSubmit={handleLogin}>
                         <div className="form-control md:w-96">
                             <label className="label">
                                 <span className="label-text text-white">Email</span>

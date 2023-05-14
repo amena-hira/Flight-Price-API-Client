@@ -4,6 +4,7 @@ import Main from '../Layout/Main';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Authentication/Login';
 import Signup from '../pages/Authentication/Signup';
+import AddFlight from '../pages/AddFlight/AddFlight';
 
 const routes = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const routes = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup></Signup>
+            },
+            {
+                path: '/addFLight',
+                element: <AddFlight></AddFlight>
             }
         ]
     },

@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
-import routes from "./routes/routes";
 import { Toaster } from "react-hot-toast";
+import routes from "./Route/Route";
 
 function App() {
   return (

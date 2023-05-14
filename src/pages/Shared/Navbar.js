@@ -7,6 +7,7 @@ const Navbar = () => {
     const {user, logout} = useContext(AuthContext);
     const menu = <>
         <li><Link to='/'>Home</Link></li>
+        <li><Link to='/addFLight'>Add Flight</Link></li>
     </>
     return (
         <div>
