@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
-const BannerSearch = ({user, setSearchData}) => {
+const BannerSearch = ({user, setSearchData, setNoData}) => {
     const [source, setSource] = useState();
     const [destination, setDestination] = useState();
     const [date, setDate] = useState();
@@ -16,9 +16,11 @@ const BannerSearch = ({user, setSearchData}) => {
                 if (data.status) {
                     console.log(data.status);
                     setSearchData(data.data);
+                    setNoData(false);
                 }
                 else {
                     setSearchData();
+                    setNoData(true);
                     toast.error('Have no flight on this date!!')
                 }
             })
