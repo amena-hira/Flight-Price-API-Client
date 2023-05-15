@@ -13,15 +13,18 @@ const Profile = () => {
                     <div className="max-w-md">
                         <div className='card bg-base-100'>
                             <div class="card-body">
-                                <div class="form-control">
-                                    <label class="label">
+                                <div className="form-control">
+                                    <label className="label">
                                         <div className="avatar">
                                             <div className="w-20 rounded-full">
                                                 <img src={profile} alt='' />
                                             </div>
                                         </div>
                                     </label>
-                                    <input type="email" defaultValue={user?.email} placeholder="email" class="input input-bordered text-black" />
+                                    <input type="email" defaultValue={user?.email} placeholder="email" className="input input-bordered text-black" />
+                                </div>
+                                <div className="form-control">
+                                    <input type="password" defaultValue={user?.password} placeholder="password" className="input input-bordered text-black" />
                                 </div>
                             </div>
                         </div>

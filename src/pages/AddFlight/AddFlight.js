@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import background from '../../images/background.webp';
 import { toast } from 'react-hot-toast';
+import { RxCross2 } from "react-icons/rx";
 
 const AddFlight = () => {
     const [flightName, setFlightName] = useState([]);
@@ -21,6 +22,7 @@ const AddFlight = () => {
         }
     }
     const handleFlightPrice = (value) => {
+        console.log("price: ", typeof value);
         if (flightPrice.length >= 0 && flightPrice.length < 3) {
             if (value !== '') {
                 setFlightPrice(flightPrice => [...flightPrice, value])
@@ -29,6 +31,14 @@ const AddFlight = () => {
             toast.error('You can not add more than 3 prices.')
         }
     }
+    const handleFlightValueReset = (value) => {
+        setFlightName(flightName.filter(item => item !== value))
+
+    }
+    const handlePriceValueReset = (value) => {
+        setFlightPrice(flightPrice.filter(item => item !== value))
+    }
+    console.log(flightName, flightPrice);
 
     const handleFLightSubmit = (event) => {
         event.preventDefault();
@@ -56,9 +66,7 @@ const AddFlight = () => {
                 .then(data => {
                     console.log(data);
                     if (data.acknowledged) {
-                        setFlightName([]);
-                        setFlightPrice([]);
-                        toast.success("Flight Added Successfully!")
+                        toast.success(`${date}->${source}->${destination}'s Flight Added Successfully!`)
                     }
                     else {
                         toast("Already added flight on this date. Thank You!!", {
@@ -113,7 +121,7 @@ const AddFlight = () => {
                             </select>
                             <div className='flex flex-wrap pt-2 gap-1'>
                                 {
-                                    flightName?.map((name, index) => <div key={index} className="badge badge-accent badge-outline">{name}</div>)
+                                    flightName?.map((name, index) => <div key={index} className="badge badge-accent badge-outline">{name} <button onClick={() => handleFlightValueReset(name)}><RxCross2></RxCross2></button></div>)
                                 }
                             </div>
                         </div>
@@ -121,7 +129,7 @@ const AddFlight = () => {
                             <input type="number" name='flightPrice' placeholder="Flight Price" className="input input-bordered text-zinc-800" onBlur={(e) => handleFlightPrice(e.target.value)} required />
                             <div className='flex flex-wrap pt-2 gap-1'>
                                 {
-                                    flightPrice?.map((price, index) => <div key={index} className="badge badge-accent badge-outline">${price}</div>)
+                                    flightPrice?.map((price, index) => <div key={index} className="badge badge-accent badge-outline">${price} <button onClick={() => handlePriceValueReset(price)}><RxCross2></RxCross2></button></div>)
                                 }
                             </div>
                         </div>

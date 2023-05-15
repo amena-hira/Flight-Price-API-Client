@@ -27,7 +27,7 @@ const BannerSearch = ({user, setSearchData, setNoData}) => {
     }
     
     return (
-        <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 bg-base-100 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-center gap-4 px-5 lg:pl-4 lg:pr-0 py-5">
+        <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 lg:justify-items-center gap-4">
             <div className="form-control w-full max-w-xs">
                 <select className="select select-bordered" name='source' onChange={(e) => setSource(e.target.value)} required>
                     <option disabled selected>Select Source</option>
