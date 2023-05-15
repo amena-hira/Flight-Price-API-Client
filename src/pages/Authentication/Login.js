@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import background from '../../images/background.webp';
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../context/AuthProvider';
@@ -8,6 +8,13 @@ import { toast } from 'react-hot-toast';
 const Login = () => {
     const { login, googleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const message = location.state?.message;
+    if (message) {
+        toast('Please Login First',{
+            icon: '👏',
+        });
+    }
 
     const handleGoogleLogin = () => {
         googleLogin()
@@ -60,13 +67,13 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text text-white">Email</span>
                             </label>
-                            <input type="text" placeholder="Email" name='email' className="input input-bordered border-white rounded-full shadow text-white bg-transparent" />
+                            <input type="email" placeholder="Email" name='email' className="input input-bordered border-white rounded-full shadow text-white bg-transparent" required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-white">Password</span>
                             </label>
-                            <input type="password" placeholder="Password" name='password' className="input input-bordered border-white rounded-full shadow text-white bg-transparent" />
+                            <input type="password" placeholder="Password" name='password' className="input input-bordered border-white rounded-full shadow text-white bg-transparent" required/>
                             <label className="label">
                                 <Link href="#" className="label-text-alt link link-hover text-white">Forgot password?</Link>
                             </label>

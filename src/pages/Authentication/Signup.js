@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import background from '../../images/background.webp';
-import { FcHome } from "react-icons/fc";
 import { AuthContext } from '../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
 
@@ -31,11 +30,6 @@ const Signup = () => {
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="max-w-xl">
-                    <div className='flex justify-end'>
-                        <Link to='/' className="text-5xl font-semibold tooltip" data-tip="Home">
-                            <FcHome></FcHome>
-                        </Link>
-                    </div>
                     <h1 className="text-5xl font-semibold">
                         Sign Up
                     </h1>
@@ -45,13 +39,13 @@ const Signup = () => {
                             <label className="label">
                                 <span className="label-text text-white">Email</span>
                             </label>
-                            <input type="text" placeholder="Email" name='email' className="input input-bordered border-white rounded-full shadow text-white bg-transparent" />
+                            <input type="email" placeholder="Email" name='email' className="input input-bordered border-white rounded-full shadow text-white bg-transparent" required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-white">Password</span>
                             </label>
-                            <input type="password" placeholder="Password" name='password' className="input input-bordered border-white rounded-full shadow text-white bg-transparent" />
+                            <input type="password" placeholder="Password" name='password' className="input input-bordered border-white rounded-full shadow text-white bg-transparent" required/>
                             <label className="label">
                                 <Link href="#" className="label-text-alt link link-hover text-white">Forgot password?</Link>
                             </label>

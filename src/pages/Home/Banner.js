@@ -3,17 +3,18 @@ import background from '../../images/background.webp';
 import SearchItems from './SearchItems';
 import { AuthContext } from '../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 
 const Banner = () => {
     const [source, setSource] = useState();
     const [destination, setDestination] = useState();
+    const [date, setDate] = useState();
     const [searchData, setSearchData] = useState();
     const { user } = useContext(AuthContext);
     const handleSearchSubmit = (event) => {
         event.preventDefault();
-        const from = event.target;
-        const date = from.date.value;
+        console.log(source, destination, date);
         fetch(`https://flight-price-api-server.vercel.app/flights?source=${source}&destination=${destination}&date=${date}`)
             .then(res => res.json())
             .then(data => {
@@ -54,14 +55,17 @@ const Banner = () => {
                         </select>
                     </div>
                     <div className="form-control">
-                        <input name='date' type="text" placeholder='Date' onFocus={(e) => (e.target.type = "date")} className="input input-bordered text-zinc-800" required />
+                        <input name='date' type="text" placeholder='Date' onFocus={(e) => (e.target.type = "date")} onChange={(e) => setDate(e.target.value)} className="input input-bordered text-zinc-800" required />
                     </div>
                     <div className="form-control w-32">
                         {
                             user ?
-                                <button className="btn bg-cyan-800 border-none hover:bg-sky-900">Search Now</button>
-                                :
-                                <button className="px-3 py-3 text-white bg-sky-300 rounded focus:outline-none" disabled>Search Now</button>
+                                source != undefined && destination && date ?
+                                    <button className="btn bg-cyan-800 border-none hover:bg-sky-900">Search Now</button>
+                                    :
+                                    <button className="px-3 py-3 text-white bg-sky-300 rounded focus:outline-none" disabled>Search Now</button>
+                            :
+                            <Link to='/login' state={{ message: true }} className="px-3 py-3 text-white bg-sky-300 rounded focus:outline-none" >Search Now</Link>
                         }
                     </div>
 
